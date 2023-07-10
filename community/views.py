@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect
 from community.forms import *
+from .models import *
 # Create your views here.
 
 def write(request):
     if request.method == 'POST':
         form = Form(request.POST)
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.name = request.user
+            post.save()
             return redirect('/posts')
     else:
         form = Form()

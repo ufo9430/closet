@@ -8,11 +8,11 @@
 <body>
     <form action="" method="post">
         {% csrf_token %}
-        {% for element in form %}
-        {{element.label}}
-        {{element}}
+        <span>제목</span>
+        {{form.title}}
         <br>
-        {% endfor %}
+        <span>내용</span>
+        {{form.contents}}
         <button type="submit" class="btn btn-primary">저장</button>
 </body>
 </html>
