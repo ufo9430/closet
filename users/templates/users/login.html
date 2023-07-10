@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+           text-align: center;
+        }
+        .login_wrap{
+            border-radius: 15px;
+            border: 2px #666 solid;
+            margin: 0 auto;
+            padding: 10px;
+            width: 300px;
+            height: 350px;
+            text-align: center;
+        }
+        .input{
+            margin:20px
+        }
+    </style>
+</head>
+<body>
+    <a href="/">home</a>
+    <div class="login_wrap">
+        <h1>🐐</h1>
+        {% include 'users/form_error.html' %}
+        <form method = 'post', action="{% url 'users:login' %}">
+            {% csrf_token %}
+            <div class="input">
+                <label for="username">아이디</label>
+                <input type="text" name="username" id="username">
+            </div>
+            <div class="input">
+                <label for="password">비밀번호</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <button type="submit">로그인</button>
+            <a href="/users/signup">회원가입</a>
+        </form>
+    </div>
+</body>
+</html>

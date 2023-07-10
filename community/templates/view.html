@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .contents {
+        border: 0px solid rgba(100, 100, 100, 1);
+        border-radius: 17px;
+        padding: 17px;
+        box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    글쓴이 : {{article.name}}
+    <br>
+    제목 : {{article.title}}
+    <br>
+    
+    <div class="contents">
+        {{article.contents}}
+    </div>
+    <br>
+    <a href="modify">수정</a>
+    <a href="delete">삭제</a>
+</body>
+</html>

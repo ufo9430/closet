@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글 목록</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css'%}">
+</head>
+<body>
+    <a href="/">home</a>
+    <div class="container my-3">
+        <table class="table">
+            <thead>
+                <tr class="table-dark">
+                    <th>번호</th>
+                    <th>작성자</th>
+                    <th>제목</th>
+                    <th>날짜</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for article in articleList %}
+                <tr>
+                    <td>
+                        {{article.id}}
+                    </td>
+                    <td>
+                        <a href="/posts/view/{{article.id}}">{{ article.title }}</a>
+                    </td>
+                    <td>
+                        {{article.name}} 
+                    </td>
+                    <td>
+                        {{article.cdate|date:"Y M d | H : m : s" }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <button type="button" onclick="location.href='write/' ">글쓰기</button> 
+</body>
+</html>
