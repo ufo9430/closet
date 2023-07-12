@@ -1,12 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="" method="post">
-    {% csrf_token %}
-    <span>제목</span>
-    {{form.title}}
-    <br>
-    <span>내용</span>a
-    {{form.contents}}
-    <button type="submit" class="btn btn-primary">저장</button>
-</form>
+<div class="container my-3">
+    <h1 class="text-center">글쓰기</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="card my-3">
+                <div class="row p-3">
+                    <div class="col input-group p-3">
+                        {{form.title}}
+                    </div>
+                </div>
+                <div class="p-3">
+                    <span>내용</span>
+                    <div class="input-group p-3">
+                        {{form.contents}}
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">저장</button>
+        </form>
+</div>
 {% endblock %}

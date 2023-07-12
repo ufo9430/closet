@@ -3,6 +3,7 @@ from community.forms import *
 from .models import *
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 # Create your views here.
 
 @login_required(login_url='users:login')
@@ -20,6 +21,9 @@ def write(request):
 @login_required(login_url='users:login')
 def modify(request, num):
     article = get_object_or_404(Article, id=num)
+    if request.user != article.name:
+        messages.error(request, "수정권한이 없습니다")
+        return redirect('community:view',num=num)
     if request.method == 'POST':
         form = Form(request.POST)
         if form.is_valid():
@@ -33,8 +37,12 @@ def modify(request, num):
 @login_required(login_url='users:login')
 def delete(request, num):
     article = get_object_or_404(Article,id=num)
-    article.delete()
-    return redirect('/posts')
+    if request.user != article.name:
+        messages.error(request, "수정권한이 없습니다")
+        return redirect('community:view',num=num)
+    else:
+        article.delete()
+        return redirect('/posts')
 def posts(request):
     articleList = Article.objects.all()
     return render(request, 'posts.html', {'articleList':articleList})
