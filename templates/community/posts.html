@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-3">
+    <table class="table">
+        <thead>
+            <tr class="table-dark">
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>날짜</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for article in articleList %}
+            <tr>
+                <td>
+                    {{article.id}}
+                </td>
+                <td>
+                    <strong><a href="/posts/view/{{article.id}}" class="text-decoration-none link-dark">{{ article.title }}</a></strong>
+                </td>
+                <td>
+                    {{article.name}} 
+                </td>
+                <td>
+                    {{article.cdate|date:"Y M d | H : m : s" }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-center">
+        <button class="btn btn-dark" onclick="location.href='write/' ">글쓰기</button> 
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "community/posts.html" %}
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="card m-3 p-3">
+            <div class="row-sm-10 my-3">
+                <label for="input-title" class="col-sm-1">제목</label>
+                <div class="col-sm-5">{{form.title}}</div>
+            </div>
+            <div class="row-sm-10 my-3">
+                <label for="input-title" class="col-sm-2">작성자</label>
+                <div class="col-sm-10">{{article.name}}</div>
+            </div>
+            {{form.media}}
+            {{form.contents}}
+        </div>
+        <div class="m-3 text-center">
+            <button type="submit" class="btn btn-dark">저장</button>
+        </div>
+    </form>
+{% endblock %}

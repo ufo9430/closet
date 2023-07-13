@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-3">
+    <!-- 에러 처리 컨테이너 -->
+    {% if messages %}
+    <div class="alert alert-danger my-3" role="alert">
+    {% for message in messages %}
+        <ul><li>{{ message.message }}</li></ul>
+    {% endfor %}
+    </div>
+    {% endif %}
+    <!-- 에러끝 -->
+    <h1 class="text-center"><strong>{{article.title}}</strong></h1>
+    <div class="border-bottom">
+        <div class="row">
+            <div class="col">
+                <div class="py-2">{{article.name}}</div>
+            </div>
+            <div class="col">
+                <div class="text-end">
+                    <a class="btn btn-dark btn-sm" href="modify">수정</a>
+                    <a class="btn btn-dark btn-sm" href="delete">삭제</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card my-3">
+        <div class="card-body">
+            {{article.contents|safe}}
+        </div>
+        <div class="d-flex justify-content-end">
+            <div class="badge bg-light text-dark p-2 text-start">
+                <div class="mb-2">{{article.name}}</div>
+                <div>{{article.cdate}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
