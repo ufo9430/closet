@@ -9,3 +9,8 @@ class Article(models.Model):
     contents = RichTextUploadingField(blank=True, null=True)
     cdate = models.DateTimeField(auto_now_add=True)
     mdate = models.DateTimeField(null=True, blank=True)
+    
+class Comment(models.Model):
+    atricle = models.ForeignKey(Article, on_delete = models.CASCADE)
+    contents = models.TextField()
+    cdate = models.DateTimeField(auto_now_add=True)

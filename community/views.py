@@ -44,10 +44,15 @@ def delete(request, num):
         return redirect('community:view',num=num)
     else:
         article.delete()
-        return redirect('/posts')
+        return redirect('community:posts')
 def posts(request):
     articleList = Article.objects.all()
     return render(request, 'community/posts.html', {'articleList':articleList})
 def view(request, num):
     article = Article.objects.get(id=num)
     return render(request, 'community/view.html', {'article':article})
+def comment_create(request, num):
+    article = get_object_or_404(Article,id=num)
+    comment = Comment(article=article, contents = request.POST.get('content'), cdate = timezone.now())
+    comment.save()
+    return redirect('community:view', num=num)

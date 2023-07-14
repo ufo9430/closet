@@ -35,5 +35,29 @@
             </div>
         </div>
     </div>
+    <!--댓글-->
+    {% for comment in article.comment_set.all %}
+    <div class="card my-3">
+        {{ comment.contents }}
+    </div>
+    {% endfor %}
+    <!--댓글 작성란-->
+    {% if user.is_authenticated %}
+    <form action="{% url 'community:comment_create' article.id %}" method="post" class="my-3">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="content" class="form-label">댓글 입력</label>
+            <div class="row">
+                <div class="col">
+                    <textarea name="content" id="content" class="form-control" rows="3" placeholder="내용을 입력하세요."></textarea>
+                </div>
+                <div class="col-1">
+                    <input type="submit" class="btn btn-dark btn-sm" value="확인">
+                </div>
+            </div>
+         </div>
+        
+    </form>
+    {% endif %}
 </div>
 {% endblock %}
