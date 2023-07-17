@@ -8,9 +8,9 @@ class Article(models.Model):
     title = models.CharField(max_length=50)
     contents = RichTextUploadingField(blank=True, null=True)
     cdate = models.DateTimeField(auto_now_add=True)
-    mdate = models.DateTimeField(null=True, blank=True)
     
 class Comment(models.Model):
-    atricle = models.ForeignKey(Article, on_delete = models.CASCADE)
+    name = models.ForeignKey(User, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, on_delete = models.CASCADE)
     contents = models.TextField()
     cdate = models.DateTimeField(auto_now_add=True)

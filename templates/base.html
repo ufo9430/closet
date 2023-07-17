@@ -27,6 +27,11 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom px-5">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'home' %}">🔥</a>
+                <ul class="nav navbar-nav ml-auto ml-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'community:posts' %}">커뮤니티</a>
+                    </li>
+                </ul>
                 <button class="navbar-toggler" type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent"
@@ -35,20 +40,33 @@
                         aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
+                        {% if user.is_authenticated %}
                         <li class="nav-item">
-                            {% if user.is_authenticated %}
-                            <a class="nav-link text-white" href=" {% url 'users:logout' %}">{{ user.username }} 로그아웃</a>
-                            {% else %}
-                            <a class="nav-link text-white" href=" {% url 'users:login' %}">로그인</a>
-                            {% endif %}
+                            <a class="nav-link text-white" href="#">{{ user.username }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href=" {% url 'users:logout' %}">로그아웃</a>
+                        </li>
+                            {% else %}
+                        <li>
+                            <a class="nav-link text-white" href=" {% url 'users:login' %}">로그인</a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
+    <!-- 에러 처리 컨테이너 -->
+    {% if messages %}
+    <div class="alert alert-danger my-3" role="alert">
+    {% for message in messages %}
+        <ul><li>{{ message.message }}</li></ul>
+    {% endfor %}
+    </div>
+    {% endif %}
     {% block content %}
     {% endblock %}
     <footer class="py-5 bg-dark mt-auto p-4">

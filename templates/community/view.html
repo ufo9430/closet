@@ -1,15 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container my-3">
-    <!-- 에러 처리 컨테이너 -->
-    {% if messages %}
-    <div class="alert alert-danger my-3" role="alert">
-    {% for message in messages %}
-        <ul><li>{{ message.message }}</li></ul>
-    {% endfor %}
-    </div>
-    {% endif %}
-    <!-- 에러끝 -->
     <h1 class="text-center"><strong>{{article.title}}</strong></h1>
     <div class="border-bottom">
         <div class="row">
@@ -35,29 +26,46 @@
             </div>
         </div>
     </div>
-    <!--댓글-->
-    {% for comment in article.comment_set.all %}
-    <div class="card my-3">
-        {{ comment.contents }}
+    <!--추천-->
+    <div>
+
     </div>
-    {% endfor %}
-    <!--댓글 작성란-->
-    {% if user.is_authenticated %}
-    <form action="{% url 'community:comment_create' article.id %}" method="post" class="my-3">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="content" class="form-label">댓글 입력</label>
+    <!--댓글-->
+    <div class="comment_wrap">
+        {% for comment in article.comment_set.all %}
+        <div class="border-top">
             <div class="row">
-                <div class="col">
-                    <textarea name="content" id="content" class="form-control" rows="3" placeholder="내용을 입력하세요."></textarea>
+                <div class="col-3" style="height: 48px; font-size: 12px">
+                    {{ comment.name }}
+                    {% if comment.name == user %}
+                    <a href="{% url 'community:comment_delete' num=article.id cnum=comment.id %}" class="text-dark">삭제</a>
+                    {% endif %}
                 </div>
-                <div class="col-1">
-                    <input type="submit" class="btn btn-dark btn-sm" value="확인">
+                <div class="col">
+                    {{ comment.contents }}
                 </div>
             </div>
-         </div>
-        
-    </form>
+        </div>
+        {% endfor %}
+    </div>
+    <!--댓글 작성-->
+    {% if user.is_authenticated %}
+    <div class="comment_wrap border-top">
+        <form action="{% url 'community:comment_create' article.id %}" method="post" class="my-3">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="content" class="form-label">댓글 입력</label>
+                <div class="row">
+                    <div class="col-9">
+                        <textarea name="content" id="content" class="form-control" rows="3" placeholder="내용을 입력하세요."></textarea>
+                    </div>
+                    <div class="col-3">
+                        <input type="submit" class="btn btn-dark btn-sm" value="확인">
+                    </div>
+                </div>
+             </div>
+        </form>
+    </div>
     {% endif %}
 </div>
 {% endblock %}
