@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
+from django.core.paginator import Paginator
 # Create your views here.
 
 @login_required(login_url='users:login')
@@ -19,6 +20,13 @@ def write(request):
     else:
         form = Form()
     return render(request, 'community/write.html', {'form':form})
+
+def test(request):
+    for i in range(100):
+        a = Article(name = request.user, title = '테스트 데이터 %03d' % i, contents = '테스트 데이터입니다', cdate = timezone.now())
+        a.save()
+    return redirect('/posts')
+
 @login_required(login_url='users:login')
 def modify(request, num):
     article = get_object_or_404(Article, id=num)
@@ -48,8 +56,13 @@ def delete(request, num):
 
 
 def posts(request):
-    articleList = Article.objects.all()
-    return render(request, 'community/posts.html', {'articleList':articleList})
+    page = request.GET.get('page', '1')
+    articleList = Article.objects.order_by('-cdate')
+    paginator = Paginator(articleList, 10)
+    page_obj = paginator.get_page(page)
+    context = {'articleList': page_obj}
+    return render(request, 'community/posts.html', context)
+
 def view(request, num):
     article = Article.objects.get(id=num)
     return render(request, 'community/view.html', {'article':article})

@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="ko" class="width-1300 navbar-scroll">
+<html lang="ko" class="navbar-scroll">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,38 +24,24 @@
 <body class="d-flex flex-column min-vh-100">
     <!-- 네비게이션바 -->
     <div class="navbar-wrapper">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom px-5">
-            <div class="container-fluid">
+        <nav class="navbar navbar-expand navbar-dark bg-dark">
+            <div class="container">
                 <a class="navbar-brand" href="{% url 'home' %}">🔥</a>
-                <ul class="nav navbar-nav ml-auto ml-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="{% url 'community:posts' %}">커뮤니티</a>
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown">{{ user.username }}</a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                            <li><a class="dropdown-item" href=" {% url 'users:profile' %}">프로필</a></li>
+                            <li><a class="dropdown-item" href=" {% url 'users:logout' %}">로그아웃</a></li>
+                        </ul>
                     </li>
+                        {% else %}
+                    <li>
+                        <a class="nav-link text-white" href=" {% url 'users:login' %}">로그인</a>
+                    </li>
+                    {% endif %}
                 </ul>
-                <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">{{ user.username }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href=" {% url 'users:logout' %}">로그아웃</a>
-                        </li>
-                            {% else %}
-                        <li>
-                            <a class="nav-link text-white" href=" {% url 'users:login' %}">로그인</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </div>
             </div>
         </nav>
     </div>
@@ -70,7 +56,7 @@
     {% block content %}
     {% endblock %}
     <footer class="py-5 bg-dark mt-auto p-4">
-        <p class="text-white text-end">Copyright : 인현민</p>
+        <p class="text-white text-end">footer</p>
     </footer>
     <script src="{% static 'bootstrap.min.js' %}"></script>
 </body>

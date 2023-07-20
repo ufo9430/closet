@@ -19,4 +19,4 @@ def signup(request):
         form = UserForm()
     return render(request, 'users/signup.html', {'form' : form})
 def profile(request):
-    return render(request)
+    return render(request, 'users/user_profile.html')
