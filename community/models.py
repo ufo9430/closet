@@ -13,6 +13,7 @@ class Category(models.Model):
         return reverse("home")
 
 class Article(models.Model):
+    
     name = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     contents = RichTextUploadingField(blank=True, null=True)

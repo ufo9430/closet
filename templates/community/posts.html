@@ -1,10 +1,10 @@
 {% extends "base.html" %}
+{% load community_filter %}
 {% block content %}
 <div class="container my-3">
     <table class="table">
         <thead>
             <tr class="table-dark">
-                <th>번호</th>
                 <th>제목</th>
                 <th>작성자</th>
                 <th>날짜</th>
@@ -14,10 +14,10 @@
             {%for article in articleList %}
             <tr>
                 <td>
-                    {{article.id}}
-                </td>
-                <td>
                     <strong><a href="/posts/v/{{article.id}}" class="text-decoration-none link-dark">{{ article.title }}</a></strong>
+                    {% if article.comment_set.count > 0 %}
+                    <span class="">{{article.comment_set.count}}</span>
+                    {% endif %}
                 </td>
                 <td>
                     {{article.name}} 
@@ -30,42 +30,35 @@
         </tbody>
     </table>
     <!--페이지-->
-    <ul class="pagination justify-content-center">
-        <!-- 이전페이지 -->
-        {% if articleList.has_previous %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ articleList.previous_page_number }}">&lt;</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">&lt;</a>
-        </li>
-        {% endif %}
-        <!-- 페이지리스트 -->
-        {% for page_number in articleList.paginator.page_range %}
-        {% if page_number >= articleList.number|add:-5 and page_number <= articleList.number|add:5 %}
-        {% if page_number == articleList.number %}
-        <li class="page-item active" aria-current="page">
-            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-        </li>
-        {% else %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-        </li>
-        {% endif %}
-        {% endif %}
-        {% endfor %}
-        <!-- 다음페이지 -->
-        {% if articleList.has_next %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ articleList.next_page_number }}">&gt;</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">&gt;</a>
-        </li>
-        {% endif %}
-    </ul>
+    <nav class="pagination-wrapper">
+        <ul class="pagination justify-content-center">
+            <!-- 이전페이지 -->
+            {% if articleList.has_previous %}
+            <li class="page-item">
+                <a class="page-link text-dark" href="?page={{ articleList.previous_page_number }}">&lt;</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link text-dark" tabindex="-1" aria-disabled="true" href="#">&lt;</a>
+            </li>
+            {% endif %}
+            <!-- 페이지리스트 -->
+            <li class="page-item active" aria-current="page">
+                <a class="page-link bg-light text-dark border">{{ articleList.number }} / {{ max_page }}</a>
+            </li>
+            <!-- 다음페이지 -->
+            {% if articleList.has_next %}
+            <li class="page-item">
+                <a class="page-link text-dark" href="?page={{ articleList.next_page_number }}">&gt;</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link text-dark" tabindex="-1" aria-disabled="true" href="#">&gt;</a>
+            </li>
+            {% endif %}
+            
+        </ul>
+    </nav>
     <div class="text-center">
         <button class="btn btn-dark" onclick="location.href='write/' ">글쓰기</button> 
     </div>

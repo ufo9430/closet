@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from community.forms import *
+from .forms import *
 from .models import *
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -59,9 +59,12 @@ def posts(request):
     page = request.GET.get('page', '1')
     articleList = Article.objects.order_by('-cdate')
     paginator = Paginator(articleList, 10)
+    max_page = len(paginator.page_range)
     page_obj = paginator.get_page(page)
-    context = {'articleList': page_obj}
+    context = {'articleList': page_obj, 'max_page': max_page}
     return render(request, 'community/posts.html', context)
+        
+
 
 def view(request, num):
     article = Article.objects.get(id=num)
