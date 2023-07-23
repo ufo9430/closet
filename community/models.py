@@ -5,15 +5,14 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 
-class Category(models.Model):
-    name = models.CharField(max_length=20)
-    def __str__(self):
-        return self.name
-    def get_absolute_url(self):
-        return reverse("home")
+CATEGORY = (
+    ('notice', '공지사항'),
+    ('talk', '잡담'),
+    ('qna', '패션질문'),
+)
 
 class Article(models.Model):
-    
+    category = models.CharField(max_length=50, choices=CATEGORY, null=True)
     name = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     contents = RichTextUploadingField(blank=True, null=True)

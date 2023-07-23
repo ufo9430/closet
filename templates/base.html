@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
     <style>
-        .login_wrap{
+        .login{
             border-radius: 15px;
             border: 2px #666 solid;
             margin: 0 auto;
@@ -25,9 +25,12 @@
     <!-- 네비게이션바 -->
     <div class="navbar-wrapper">
         <nav class="navbar navbar-expand navbar-dark bg-dark">
-            <div class="container">
+            <div class="container d-flex justify-content-between">
                 <a class="navbar-brand" href="{% url 'home' %}">🔥</a>
                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'community:posts' %}">커뮤니티</a>
+                    </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown">{{ user.username }}</a>
@@ -53,8 +56,10 @@
     {% endfor %}
     </div>
     {% endif %}
+    <!--본문 컨테이너-->
     {% block content %}
     {% endblock %}
+    <!--푸터-->
     <footer class="py-5 bg-dark mt-auto p-4">
         <p class="text-white text-end">footer</p>
     </footer>

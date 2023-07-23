@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="login_wrap">
+<div class="container-wrap my-5">
+    <div class="login">
         <h1>🐐</h1>
         {% include 'users/form_error.html' %}
         <form method = 'post', action="{% url 'users:login' %}">
@@ -18,4 +19,5 @@
             <a href="/users/signup" class="btn btn-dark">회원가입</a>
         </form>
     </div>
+</div>
 {% endblock %}

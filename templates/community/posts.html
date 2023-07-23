@@ -2,21 +2,35 @@
 {% load community_filter %}
 {% block content %}
 <div class="container my-3">
+    <div class="container d-flex my-3 justify-content-start">
+        <div>
+            <h1 style="font-weight: bold;">커뮤니티</h1>
+        </div>
+    </div>
     <table class="table">
         <thead>
             <tr class="table-dark">
+                <th>번호</th>
                 <th>제목</th>
                 <th>작성자</th>
-                <th>날짜</th>
+                <th>시간</th>
             </tr>
         </thead>
         <tbody>
             {%for article in articleList %}
             <tr>
+                <td>{{article.id}}</td>
                 <td>
+                    {%if article.category == "notice" %}
+                    <span class="badge bg-danger" style="font-size: 8px;">{{article.category}}</span>
+                    {% else %}
+                    <span class="badge bg-secondary" style="font-size: 8px;">{{article.category}}</span>
+                    {% endif %}
                     <strong><a href="/posts/v/{{article.id}}" class="text-decoration-none link-dark">{{ article.title }}</a></strong>
                     {% if article.comment_set.count > 0 %}
-                    <span class="">{{article.comment_set.count}}</span>
+                    <span style="font-size: 12px;">{{article.comment_set.count}}</span>
+                    {% else %}
+                    <span> </span>
                     {% endif %}
                 </td>
                 <td>

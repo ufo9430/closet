@@ -23,7 +23,7 @@ def write(request):
 
 def test(request):
     for i in range(100):
-        a = Article(name = request.user, title = '테스트 데이터 %03d' % i, contents = '테스트 데이터입니다', cdate = timezone.now())
+        a = Article(category = "talk", name = request.user, title = '테스트 데이터 %03d' % i, contents = '테스트 데이터입니다', cdate = timezone.now())
         a.save()
     return redirect('/posts')
 
@@ -59,8 +59,9 @@ def posts(request):
     page = request.GET.get('page', '1')
     articleList = Article.objects.order_by('-cdate')
     paginator = Paginator(articleList, 10)
-    max_page = len(paginator.page_range)
     page_obj = paginator.get_page(page)
+    
+    max_page = len(paginator.page_range)
     context = {'articleList': page_obj, 'max_page': max_page}
     return render(request, 'community/posts.html', context)
         
