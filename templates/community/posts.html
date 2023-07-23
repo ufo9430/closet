@@ -2,21 +2,47 @@
 {% load community_filter %}
 {% block content %}
 <div class="container my-3">
+    <!--메인 컨테이너-->
     <div class="container d-flex my-3 justify-content-start">
         <div>
-            <h1 style="font-weight: bold;">커뮤니티</h1>
+            <h1 style="font-weight: bold;">커뮤니티</h1> 
         </div>
     </div>
-    <table class="table">
+    <table class="table border-top" style="font-size: 12px;">
         <thead>
-            <tr class="table-dark">
+            <tr class="table-light">
                 <th>번호</th>
                 <th>제목</th>
                 <th>작성자</th>
                 <th>시간</th>
+                <th>조회수</th>
             </tr>
         </thead>
         <tbody>
+            {%for notice in noticeList %}
+            <tr class="bg-light">
+                <td>
+                    <span class="badge bg-danger" style="font-size: 8px;">{{notice.category}}</span>
+                </td>
+                <td>
+                    <strong><a href="/posts/v/{{notice.id}}" class="text-decoration-none link-dark">{{ notice.title }}</a></strong>
+                    {% if notice.comment_set.count > 0 %}
+                    <span style="font-size: 12px;">{{notice.comment_set.count}}</span>
+                    {% else %}
+                    <span> </span>
+                    {% endif %}
+                </td>
+                <td>
+                    {{notice.name}} 
+                </td>
+                <td>
+                    {{notice.cdate|date:"H:m"}}
+                </td>
+                <td>
+                    {{notice.hits}}
+                </td>
+            </tr>
+            {% endfor %}
             {%for article in articleList %}
             <tr>
                 <td>{{article.id}}</td>
@@ -37,14 +63,17 @@
                     {{article.name}} 
                 </td>
                 <td>
-                    {{article.cdate|date:"Y M d | H : m : s" }}
+                    {{article.cdate|date:"H:m"}}
+                </td>
+                <td>
+                    {{article.hits}}
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <!--페이지-->
-    <nav class="pagination-wrapper">
+    <nav class="pagination-wrapper" style="font-size: 12px;">
         <ul class="pagination justify-content-center">
             <!-- 이전페이지 -->
             {% if articleList.has_previous %}
@@ -76,6 +105,5 @@
     <div class="text-center">
         <button class="btn btn-dark" onclick="location.href='write/' ">글쓰기</button> 
     </div>
-    <a href="{% url 'community:test' %}">테스트</a>
 </div>
 {% endblock %}

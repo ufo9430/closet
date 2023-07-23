@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'home',
     'users',
     'community',
+    'shop',
 
     'ckeditor',
     'ckeditor_uploader',

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container-wrap my-5">
-    <div class="login">
+<div class="container-wrap">
+    <div class="login my-3">
         <h1>🐐</h1>
         {% include 'users/form_error.html' %}
         <form method = 'post', action="{% url 'users:login' %}">

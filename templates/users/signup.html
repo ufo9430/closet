@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="login_wrap">
+<div class="login my-3">
     <form method ="post" action="{% url 'users:signup' %}">
         {% csrf_token %}
         {% include "users/form_error.html" %}

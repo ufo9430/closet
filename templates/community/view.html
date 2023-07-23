@@ -3,12 +3,14 @@
 <div class="container my-3">
     <h1 class="text-center"><strong>{{article.title}}</strong></h1>
     <div class="border-bottom">
-        <div class="row">
+        <div class="row my-3">
             <div class="col">
-                <div class="py-2">{{article.name}}</div>
+                <span class="py-2">{{article.name}}</span>
             </div>
             <div class="col">
                 <div class="text-end">
+                    <span class="badge bg-secondary">{{article.hits}}</span>
+                    <a class="btn btn-dark btn-sm" href="{% url 'community:posts' %}">목록</a>
                     <a class="btn btn-dark btn-sm" href="modify">수정</a>
                     <a class="btn btn-dark btn-sm" href="delete">삭제</a>
                 </div>
@@ -16,7 +18,7 @@
         </div>
     </div>
     <div class="card my-3">
-        <div class="card-body">
+        <div class="card-body" style="overflow: auto;">
             {{article.contents|safe}}
         </div>
         <div class="d-flex justify-content-end">
@@ -34,15 +36,18 @@
     <div class="comment_wrap">
         {% for comment in article.comment_set.all %}
         <div class="border-top">
-            <div class="row">
-                <div class="col-3" style="height: 48px; font-size: 12px">
+            <div class="row" style="height: 48px; font-size: 12px;">
+                <div class="col-3">
                     {{ comment.name }}
                     {% if comment.name == user %}
                     <a href="{% url 'community:comment_delete' num=article.id cnum=comment.id %}" class="text-dark">삭제</a>
                     {% endif %}
                 </div>
-                <div class="col">
+                <div class="col-5">
                     {{ comment.contents }}
+                </div>
+                <div class="col-1">
+                    {{ comment.cdate|date:"H:m:s"}}
                 </div>
             </div>
         </div>

@@ -21,12 +21,6 @@ def write(request):
         form = Form()
     return render(request, 'community/write.html', {'form':form})
 
-def test(request):
-    for i in range(100):
-        a = Article(category = "talk", name = request.user, title = '테스트 데이터 %03d' % i, contents = '테스트 데이터입니다', cdate = timezone.now())
-        a.save()
-    return redirect('/posts')
-
 @login_required(login_url='users:login')
 def modify(request, num):
     article = get_object_or_404(Article, id=num)
@@ -42,7 +36,7 @@ def modify(request, num):
             article.save()
             return redirect('/posts')
     else:
-        form = Form()
+        form = Form(instance=article)
     return render(request, 'community/modify.html', {'form':form, 'article':article})
 @login_required(login_url='users:login')
 def delete(request, num):
@@ -58,18 +52,23 @@ def delete(request, num):
 def posts(request):
     page = request.GET.get('page', '1')
     articleList = Article.objects.order_by('-cdate')
-    paginator = Paginator(articleList, 10)
+    noticeList = Article.objects.filter(category='notice')
+
+    paginator = Paginator(articleList, 30)
     page_obj = paginator.get_page(page)
     
     max_page = len(paginator.page_range)
-    context = {'articleList': page_obj, 'max_page': max_page}
+    context = {'articleList': page_obj, 'max_page': max_page, 'noticeList':noticeList}
     return render(request, 'community/posts.html', context)
         
 
 
 def view(request, num):
     article = Article.objects.get(id=num)
-    return render(request, 'community/view.html', {'article':article})
+    context = { 'article': article }
+    article.hits += 1
+    article.save()
+    return render(request, 'community/view.html', context)
 
 
 def comment_create(request, num):
