@@ -13,7 +13,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password) # 로그인 전 객체 생성
             login(request, user)
-            messages.error("환영합니다,",username,"님!")
+            messages.error(request, "환영합니다!") # 인자 전달 문제 수정필요
             return redirect('/')
     else:
         form = UserForm()

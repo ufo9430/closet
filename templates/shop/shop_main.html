@@ -1,11 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
-<aside class="sidebar left-sidebar">
-    <div class="card">sidebar</div>
+<aside class="sidebar-left my-3" style="float:left">
+    <div class="sidebar-menu card">
+        <div class="sidebar-item card m-1">
+            사이드바
+        </div>
+        <div class="sidebar-item card m-1">
+            사이드바
+        </div>
+        <div class="sidebar-item card m-1">
+            사이드바
+        </div>
+        <div class="sidebar-item card m-1">
+            사이드바
+        </div>
+        <div class="sidebar-item card m-1">
+            사이드바
+        </div>
+    </div>
 </aside>
-<article class="container-fluid board-article">
-    <div class="container my-3">
-        <div class="card">main container</div>
+<article class="container-wrap">
+    <div class="container-xl">
+        <div class="card my-3 d-flex align-content-start flex-wrap">
+            <div class="card m-3">
+                <p>이미지</p>
+                <p>거시기</p>
+            </div>
+        </div>
     </div>
 </article>
 {% endblock %}
