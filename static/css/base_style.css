@@ -11,7 +11,13 @@
     margin:20px
 }
 /* 사이드바 스타일 */
+#sidebar-wrapper{
+    min-width: 150px;
+}
+
 aside{
-    float : right;
-    width : 150px;
+    float : left;
+}
+article{
+    float : center;
 }

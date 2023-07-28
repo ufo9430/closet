@@ -1,10 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="wrap_container">
-    <div class="container">
+    <div class="container card my-3">
+        <h1 style="text-align: center;"><strong>PROFILE</strong></h1>
         <div class="card my-3">
-            <h1 style="text-align: center;"><strong>{{user}}의 프로필</strong></h1>
-            <img src="{{user.profile_picture}}" alt="">
+            <span class="m-3 w-25" style="margin:0 auto">
+                <img src="{{user.profile_picture}}" alt="" style="width:100px; height:100px">
+                <h2><strong>{{user}}</strong></h2>
+                <ul class="list-group">
+                    <a class="list-group-item" href="#">프로필 변경</a>
+                    <a class="list-group-item" href="#">프로필 변경</a>
+                    <a class="list-group-item" href="#">프로필 변경</a>
+                    <a class="list-group-item" href="#">프로필 변경</a>
+                </ul>
+            </span>
+            <div class="border-start me-3" style="float:right">fasdfs</div>
         </div>
     </div>
 </div>

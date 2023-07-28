@@ -61,7 +61,11 @@ def posts(request):
     context = {'articleList': page_obj, 'max_page': max_page, 'noticeList':noticeList}
     return render(request, 'community/posts.html', context)
         
-
+def test(request):
+    for i in range(200):
+        article = Article(category = "talk",name = request.user,title = "테스트 %03d"%i, contents = "테스트 내용")
+        article.save()
+    return render(request, 'community/posts.html')
 
 def view(request, num):
     article = Article.objects.get(id=num)
