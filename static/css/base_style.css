@@ -12,9 +12,17 @@
 }
 /* 사이드바 스타일 */
 #sidebar-wrapper{
-    min-width: 150px;
+    min-width: 200px;
+    margin:5px;
 }
-
+.sidebar-item{
+    font-size: 13px;
+    border-top: 1px solid #ddd;
+    padding: 8px;
+}
+.shop-item{
+    width: 200px;
+}
 aside{
     float : left;
 }
