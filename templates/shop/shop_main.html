@@ -14,15 +14,22 @@
 </aside>
 <article class="container-wrap">
   <div class="container d-flex flex-wrap">
+    {% for item in productList %}
     <div class="p-2 m-1 card shop-item">
-      <img class="card-img-top" src="/media/profile/profile_default.jpg" alt="" style="width: 182px; height: 182px;">
+      <img class="card-img-top" src="{{item.image}}" alt="" style="width: 182px; height: 182px;">
       <div class="card-body">
-        <h5 class="card-title">제품명</h5>
-        <span class="card-text">카테고리</span>
+        <div class="row">
+          <div class="col"><span class="card-title">item</span></div>
+          <div class="col text-end"><span class="card-text" style="font-size: 12px;">{{item.category3}}</span></div>
+        </div>
         <hr class="divider">
-        <h6 class="card-text">가격</h6>
+        <div class="w-100" style="text-align: end;">
+          <h6 class="card-text"><strong>{{item.lprice}}</strong></h6>
+          <a class="btn btn-dark btn-sm" href={{item.link}}>이동</a>
+        </div>
       </div>
     </div>
+    {% endfor %}
   </div>
 </article>
 {% endblock %}

@@ -18,7 +18,7 @@ class Article(models.Model):
     contents = RichTextUploadingField(blank=True, null=True)
     cdate = models.DateTimeField(auto_now_add=True)
     hits = models.PositiveIntegerField(default=0, verbose_name='조회수')
-    
+
 class Comment(models.Model):
     name = models.ForeignKey(User, on_delete=models.CASCADE)
     article = models.ForeignKey(Article, on_delete = models.CASCADE)
