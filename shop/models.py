@@ -1,8 +1,10 @@
 from django.db import models
 
 # Create your models here.
-class Product(models.Model):
-    product_name = models.CharField(max_length=50)
-    product_image = models.ImageField()
-    product_category = models.CharField(max_length=20)
-    product_price = models.IntegerField()
+BRAND_LIST = {
+    'lafudgestore': '라퍼지스토어',
+    'uniformbridge': '유니폼브릿지',
+    'insilence': '인사일런스',
+}
+class Brand(models.Model):
+    brand_name = models.CharField(max_length=30)

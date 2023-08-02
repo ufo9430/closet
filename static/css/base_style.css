@@ -15,7 +15,11 @@
     min-width: 200px;
     margin:5px;
 }
+.sidebar-main{
+    padding-left:0;
+}
 .sidebar-item{
+    list-style-type: none;
     font-size: 13px;
     border-top: 1px solid #ddd;
     padding: 8px;

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.core.paginator import Paginator
+from . import models
 import os, requests
 
 # Create your views here.
@@ -11,10 +11,8 @@ URL = "https://openapi.naver.com/v1/search/shop"
 CLIENT_ID = file[0]
 CLIENT_SECRET = file[1]
 
-def search(request):
-    return render(request, 'shop_main.html')
-def main(request):
-    search_word = "라퍼지스토어 자켓"
+def search_item(keyword):
+    search_word = keyword
     encode_type = "json"
     sort = "sim"
     
@@ -32,6 +30,15 @@ def main(request):
         for data in enumerate(r.json()['items']):
             productlist.append(data[1])
     
-    context = {'productList' : productlist}
+    return productlist
+def brand(request, current_brand):
+    brand_list = models.BRAND_LIST.values()
+    productlist = search_item(current_brand)
+    context = {'productlist' : productlist, 'brandlist' : brand_list}
+    return render(request, 'shop/shop_main.html', context = context)
 
+def main(request):
+    brand_list = models.BRAND_LIST.values()
+    productlist = search_item("유니폼브릿지")
+    context = {'productlist' : productlist, 'brandlist' : brand_list}
     return render(request, 'shop/shop_main.html', context=context)

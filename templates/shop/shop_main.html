@@ -1,20 +1,16 @@
 {% extends 'base.html' %}
+{% load shop_filter %}
 {% block content %}
 <aside id="sidebar-wrapper">
-  <div id="sidebar">
-    <div class="sidebar-item"><strong>카테고리</strong></div>
-    <div class="sidebar-item"><strong>카테고리</strong></div>
-    <div class="sidebar-item"><strong>카테고리</strong></div>
-    <div class="sidebar-item"><strong>카테고리</strong></div>
-    <div class="sidebar-item"><strong>카테고리</strong></div>
-    <div class="sidebar-item"><strong>카테고리</strong></div>
-    <div class="sidebar-item"><strong>카테고리</strong></div>
-    <div class="sidebar-item"><strong>카테고리</strong></div>
-  </div>
+  <ul class="sidebar-main">
+    {% for brand in brandlist %}
+    <li class="sidebar-item"><strong>{{brand}}</strong></li>
+    {% endfor %}
+  </ul>
 </aside>
 <article class="container-wrap">
   <div class="container d-flex flex-wrap">
-    {% for item in productList %}
+    {% for item in productlist %}
     <div class="p-2 m-1 card shop-item">
       <img class="card-img-top" src="{{item.image}}" alt="" style="width: 182px; height: 182px;">
       <div class="card-body">
@@ -24,7 +20,7 @@
         </div>
         <hr class="divider">
         <div class="w-100" style="text-align: end;">
-          <h6 class="card-text"><strong>{{item.lprice}}</strong></h6>
+          <h6 class="card-text"><strong>{{item.lprice|comma}}</strong></h6>
           <a class="btn btn-dark btn-sm" href={{item.link}}>이동</a>
         </div>
       </div>
