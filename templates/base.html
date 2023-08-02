@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'icon/favicon-32x32.png'%}">
+    <!--왜안됨 파비콘-->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
     <title>CLOSET</title>
@@ -13,7 +15,7 @@
     <div class="navbar-wrapper">
         <nav class="navbar navbar-expand navbar-dark bg-dark">
             <div class="container d-flex justify-content-between">
-                <a class="navbar-brand" href="{% url 'home' %}">🔥</a>
+                <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'icon/favicon-32x32.png' %}" alt=""></a>
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'shop:shop_main' %}">SHOP</a>
@@ -53,7 +55,7 @@
     </div>
     <!--푸터-->
     <footer class="py-5 bg-dark mt-auto p-4">
-        <p class="text-white text-end">Copyright by 인현민</p>
+        <p class="text-white text-end">ufo9430@naver.com</p>'
     </footer>
     <script src="{% static 'bootstrap.min.js' %}"></script>
 </body>

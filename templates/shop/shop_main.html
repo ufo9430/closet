@@ -3,8 +3,8 @@
 {% block content %}
 <aside id="sidebar-wrapper">
   <ul class="sidebar-main">
-    {% for brand in brandlist %}
-    <li class="sidebar-item"><strong>{{brand}}</strong></li>
+    {% for item in brandlist.keys %}
+    <li class="sidebar-item"><strong><a class="text-decoration-none text-dark" href="/shop/brands/{{item}}">{{item}}</a></strong></li>
     {% endfor %}
   </ul>
 </aside>

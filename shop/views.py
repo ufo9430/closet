@@ -31,14 +31,15 @@ def search_item(keyword):
             productlist.append(data[1])
     
     return productlist
-def brand(request, current_brand):
-    brand_list = models.BRAND_LIST.values()
-    productlist = search_item(current_brand)
+def brand(request, item):
+    brand_list = models.BRAND_LIST
+    print(brand_list[item])
+    productlist = search_item(brand_list[item])
     context = {'productlist' : productlist, 'brandlist' : brand_list}
     return render(request, 'shop/shop_main.html', context = context)
 
 def main(request):
-    brand_list = models.BRAND_LIST.values()
-    productlist = search_item("유니폼브릿지")
+    brand_list = models.BRAND_LIST
+    productlist = search_item("시즌오프 남성")
     context = {'productlist' : productlist, 'brandlist' : brand_list}
     return render(request, 'shop/shop_main.html', context=context)
