@@ -2,11 +2,36 @@
 {% load shop_filter %}
 {% block content %}
 <aside id="sidebar-wrapper">
-  <ul class="sidebar-main">
-    {% for item in brandlist.keys %}
-    <li class="sidebar-item"><strong><a class="text-decoration-none text-dark" href="/shop/brands/{{item}}">{{item}}</a></strong></li>
-    {% endfor %}
-  </ul>
+  <div id="sidebar">
+    <ul class="nav nav-tabs">
+      <li class="nav-item" style="font-size:12px">
+        <button class="nav-link active text-dark" id="brand-tab" data-bs-toggle="tab" 
+        data-bs-target="#brand" type="button" role="tab" aria-controls=
+        "brand" aria-selected="true">브랜드</button>
+      </li>
+      <li class="nav-item" style="font-size:12px">
+        <button class="nav-link text-dark" id="category-tab" data-bs-toggle="tab" 
+        data-bs-target="#category" type="button" role="tab" aria-controls=
+        "category" aria-selected="true">카테고리</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane show active" id="brand" role="tabpanel" aria-labelledby="brand-tab">
+        <ul class="item-list">
+          {% for item in brandlist.keys %}
+          <li class="sidebar-item"><strong><a class="text-decoration-none text-dark" href="/shop/brands/{{item}}">{{item}}</a></strong></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="tab-pane" id="category" role="tabpanel" aria-labelledby="category-tab">
+        <ul class="item-list">
+          {% for item in categorylist.keys %}
+          <li class="sidebar-item"><strong><a class="text-decoration-none text-dark" href="/shop/brands/{{item}}">{{item}}</a></strong></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
 </aside>
 <article class="container-wrap">
   <div class="container d-flex flex-wrap">

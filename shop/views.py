@@ -11,8 +11,8 @@ URL = "https://openapi.naver.com/v1/search/shop"
 CLIENT_ID = file[0]
 CLIENT_SECRET = file[1]
 
-def search_item(keyword):
-    search_word = keyword
+def search_item(keyword, category):
+    search_word = keyword + category
     encode_type = "json"
     sort = "sim"
     
@@ -33,13 +33,15 @@ def search_item(keyword):
     return productlist
 def brand(request, item):
     brand_list = models.BRAND_LIST
+    category_list = models.CATEGORY_LIST
     print(brand_list[item])
-    productlist = search_item(brand_list[item])
-    context = {'productlist' : productlist, 'brandlist' : brand_list}
+    productlist = search_item(brand_list[item], "")
+    context = {'productlist' : productlist, 'brandlist' : brand_list, 'categorylist' : category_list}
     return render(request, 'shop/shop_main.html', context = context)
 
 def main(request):
     brand_list = models.BRAND_LIST
-    productlist = search_item("시즌오프 남성")
-    context = {'productlist' : productlist, 'brandlist' : brand_list}
+    category_list = models.CATEGORY_LIST
+    productlist = search_item("시즌오프 남성", "자켓")
+    context = {'productlist' : productlist, 'brandlist' : brand_list, 'categorylist' : category_list}
     return render(request, 'shop/shop_main.html', context=context)
