@@ -32,10 +32,13 @@ def search_item(keyword, category):
     
     return productlist
 def brand(request, item):
+    if request.method == 'GET':
+        print(request.GET)
+    category=""
     brand_list = models.BRAND_LIST
     category_list = models.CATEGORY_LIST
     print(brand_list[item])
-    productlist = search_item(brand_list[item], "")
+    productlist = search_item(brand_list[item], category)
     context = {'productlist' : productlist, 'brandlist' : brand_list, 'categorylist' : category_list}
     return render(request, 'shop/shop_main.html', context = context)
 

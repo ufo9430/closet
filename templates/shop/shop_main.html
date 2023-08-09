@@ -24,11 +24,13 @@
         </ul>
       </div>
       <div class="tab-pane" id="category" role="tabpanel" aria-labelledby="category-tab">
-        <ul class="item-list">
-          {% for item in categorylist.keys %}
-          <li class="sidebar-item"><strong><a class="text-decoration-none text-dark" href="/shop/brands/{{item}}">{{item}}</a></strong></li>
-          {% endfor %}
-        </ul>
+        <form action="" method="GET">
+          <ul class="item-list">
+            {% for item in categorylist.keys %}
+            <li class="sidebar-item"><strong><button type="submit" name="category" class="text-decoration-none text-dark" value="{{item}}">{{item}}</button></strong></li>
+            {% endfor %}
+          </ul>
+        </form>
       </div>
     </div>
   </div>
