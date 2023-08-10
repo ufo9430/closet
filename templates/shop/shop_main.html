@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 {% load shop_filter %}
+{% load static %}
 {% block content %}
-<aside id="sidebar-wrapper">
-  <div id="sidebar">
+<aside id="sidebar-wrap">
+  <div class="sidebar-left">
     <ul class="nav nav-tabs">
-      <li class="nav-item" style="font-size:12px">
+      <li class="nav-item" style="font-size:13px">
         <button class="nav-link active text-dark" id="brand-tab" data-bs-toggle="tab" 
         data-bs-target="#brand" type="button" role="tab" aria-controls=
         "brand" aria-selected="true">브랜드</button>
       </li>
-      <li class="nav-item" style="font-size:12px">
+      <li class="nav-item" style="font-size:13px">
         <button class="nav-link text-dark" id="category-tab" data-bs-toggle="tab" 
         data-bs-target="#category" type="button" role="tab" aria-controls=
         "category" aria-selected="true">카테고리</button>
@@ -25,17 +26,23 @@
       </div>
       <div class="tab-pane" id="category" role="tabpanel" aria-labelledby="category-tab">
         <form action="" method="GET">
-          <ul class="item-list">
+          <div class="item-list d-flex flex-wrap" style="width:200px">
             {% for item in categorylist.keys %}
-            <li class="sidebar-item"><strong><button type="submit" name="category" class="text-decoration-none text-dark" value="{{item}}">{{item}}</button></strong></li>
+            <strong><button type="submit" name="category" class="m-1 btn btn-secondary" value="{{item}}">{{item}}</button></strong>
             {% endfor %}
-          </ul>
+          </div>
         </form>
       </div>
     </div>
   </div>
 </aside>
-<article class="container-wrap">
+<article class="container-wrap d-flex flex-column">
+  <div class="container">
+    <div class="p-2">
+      <h2><strong>{{brand}}</strong></h2>
+      <h4 class="text-secondary">{{category}}</h4>
+    </div>
+  </div>
   <div class="container d-flex flex-wrap">
     {% for item in productlist %}
     <div class="p-2 m-1 card shop-item">
@@ -55,4 +62,7 @@
     {% endfor %}
   </div>
 </article>
+<aside>
+  <div class="sidebar-right">사이드바</div>
+</aside>
 {% endblock %}
