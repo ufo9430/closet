@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
 <aside id="sidebar-wrap">
-  <div class="sidebar-left">
+  <div class="sidebar-left m-3">
     <ul class="nav nav-tabs">
       <li class="nav-item" style="font-size:13px">
         <button class="nav-link active text-dark" id="brand-tab" data-bs-toggle="tab" 
@@ -49,20 +49,21 @@
       <img class="card-img-top" src="{{item.image}}" alt="" style="width: 182px; height: 182px;">
       <div class="card-body">
         <div class="row">
-          <div class="col"><span class="card-title">item</span></div>
-          <div class="col text-end"><span class="card-text" style="font-size: 12px;">{{item.category3}}</span></div>
+          <div class="col"><p class="card-title">item</p></div>
+          <div class="col-7 text-end"><span class="card-text" style="font-size: 12px;">{{item.category3}}</span></div>
         </div>
         <hr class="divider">
-        <div class="w-100" style="text-align: end;">
-          <h6 class="card-text"><strong>{{item.lprice|comma}}</strong></h6>
-          <a class="btn btn-dark btn-sm" href={{item.link}}>이동</a>
+        <div class="row" style="text-align: end;">
+          <div class="col text-start py-2">
+            <h6 class="card-text"><strong>{{item.lprice|comma}}</strong></h6>
+          </div>
+          <div class="col">
+            <a class="btn btn-dark btn-sm" href={{item.link}}>이동</a>
+          </div>
         </div>
       </div>
     </div>
     {% endfor %}
   </div>
 </article>
-<aside>
-  <div class="sidebar-right">사이드바</div>
-</aside>
 {% endblock %}

@@ -36,18 +36,21 @@
     <div class="comment_wrap">
         {% for comment in article.comment_set.all %}
         <div class="border-top">
-            <div class="row" style="height: 48px; font-size: 12px;">
+            <div class="row p-2" style="font-size: 12px;">
                 <div class="col-3">
-                    {{ comment.name }}
+                    <img src="{{ comment.name.profile_picture }}" alt="" class="w-25">
+                    <span>{{ comment.name }}</span>
+                </div>
+                <div class="col p-2">
+                    {{ comment.contents }}
+                </div>
+                <div class="col-1 p-2">
+                    <span>{{ comment.cdate|date:"H:m:s"}}</span>
+                </div>
+                <div class="col-1 p-2">
                     {% if comment.name == user %}
                     <a href="{% url 'community:comment_delete' num=article.id cnum=comment.id %}" class="text-dark">삭제</a>
                     {% endif %}
-                </div>
-                <div class="col-5">
-                    {{ comment.contents }}
-                </div>
-                <div class="col-1">
-                    {{ comment.cdate|date:"H:m:s"}}
                 </div>
             </div>
         </div>
